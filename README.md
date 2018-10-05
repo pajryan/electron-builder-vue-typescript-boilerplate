@@ -5,19 +5,11 @@
 yarn install
 ```
 
-### Compiles and hot-reloads for development in browser
-```
-yarn serve
-```
+## Running in Electron (which is the point of this)
 
-### Compiles and hot-reloads for development in electron
+### Compiles and hot-reloads for development
 ```
 yarn serve:electron
-```
-
-### Compiles and minifies for production in browser
-```
-yarn build
 ```
 
 ### Compiles and minifies for production in electron
@@ -25,17 +17,36 @@ yarn build
 yarn build:electron
 ```
 
+
+## Can also run in a browser
+
+### Compiles and hot-reloads for development in browser
+```
+yarn serve
+```
+
+### Compiles and minifies for production in browser
+```
+yarn build
+```
+
+## Testing
+
 ### Run your tests
 ```
 yarn test
 ```
+
+
+### Run your unit tests
+```
+yarn test:unit
+```
+
+## Linting
 
 ### Lints and fixes files
 ```
 yarn lint
 ```
 
-### Run your unit tests
-```
-yarn test:unit
-```

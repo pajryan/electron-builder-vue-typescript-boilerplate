@@ -13,29 +13,9 @@
 
 <style lang="scss">
 // this is ROOT css stuff.  Note that Bootstrap is loaded in main.ts (loading it here doesn't work)
-@import url('~@/assets/css/main.css');
+// @import url('~@/assets/css/main.scss');
 
 // this is really helpful for styles/icons: https://github.com/SimulatedGREG/electron-vue/issues/463
-// html, body{
-//   height: 100%;
-// }
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  height: 100%
-}
-// #nav {
-//   padding: 30px;
-//   a {
-//     font-weight: bold;
-//     text-decoration: none;
-//     color: #2c3e50;
-//     &.router-link-exact-active {
-//       color: #008edc;
-//     }
-//   }
-// }
+
+
 </style>

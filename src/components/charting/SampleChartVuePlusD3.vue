@@ -11,11 +11,14 @@
 
 
 <script>
-/* tslint:disable */
+
+/*
+  This version of the chart combines vue's data binding with d3
+  https://medium.com/tyrone-tudehope/composing-d3-visualizations-with-vue-js-c65084ccb686
+*/
 
 import { mapState } from 'vuex' // import state
-import * as d3 from 'd3';
-
+import * as d3 from 'd3'
 
 // properties passed in
 const props = {
@@ -29,11 +32,11 @@ const props = {
       left: 0, right: 0, top: 0, bottom: 0,
     }),
   }
-};
+}
 
 export default{
   name: 'sample-chart',
-  props, 
+  props,
   computed: {
     ...mapState(['isAdmin', 'applicationVersion'])
   },
@@ -49,7 +52,7 @@ export default{
         y: null,
       },
       points: [],
-    };
+    }
   },
   computed: {
     padded() {
@@ -59,52 +62,46 @@ export default{
     }
   },
   mounted() {
-    console.log('making chart with data', this.data)
-    window.addEventListener('resize', this.onResize);
-    this.onResize();
+    window.addEventListener('resize', this.onResize)
+    this.onResize()
   },
   beforeDestroy() {
-    window.removeEventListener('resize', this.onResize);
+    window.removeEventListener('resize', this.onResize)
   },
   watch: {
     data: function dataChanged(newData, oldData) {
-      this.tweenData(newData, oldData);
+      this.initialize()
+      this.update()
     },
     width: function widthChanged() {
-      this.initialize();
-      this.update();
+      this.initialize()
+      this.update()
     },
   },
   methods: {
     onResize() {
-      console.log('new hei8ght', this.$el.offsetHeight)
-      this.width = this.$el.offsetWidth;
-      this.height = this.$el.offsetHeight; // < 200 ? 200 : this.$el.offsetHeight;
+      this.width = this.$el.offsetWidth
+      this.height = this.$el.offsetHeight
     },
     createLine: d3.line().x(d => d.x).y(d => d.y),
     initialize() {
-      this.scaled.x = d3.scaleLinear().range([0, this.padded.width]);
-      this.scaled.y = d3.scaleLinear().range([this.padded.height, 0]);
-      d3.axisLeft().scale(this.scaled.x);
-      d3.axisBottom().scale(this.scaled.y);
+      this.scaled.x = d3.scaleLinear().range([0, this.padded.width])
+      this.scaled.y = d3.scaleLinear().range([this.padded.height, 0])
+      d3.axisLeft().scale(this.scaled.x)
+      d3.axisBottom().scale(this.scaled.y)
     },
     update() {
-      this.scaled.x.domain(d3.extent(this.data, (d, i) => d.x));
-      this.scaled.y.domain(d3.extent(this.data, (d, i) => d.y));
-      this.points = [];
+      this.scaled.x.domain(d3.extent(this.data, (d, i) => d.x))
+      this.scaled.y.domain(d3.extent(this.data, (d, i) => d.y))
+      this.points = []
       this.data.forEach(d => {
         this.points.push({
           x: this.scaled.x(d.x),
           y: this.scaled.y(d.y)
-        });
+        })
       })
-      this.paths.line = this.createLine(this.points);
+      this.paths.line = this.createLine(this.points)
     }
-
-
-
-
-
   }
 }
 
@@ -113,8 +110,7 @@ export default{
 
 <style scoped lang="scss">
 .chartHolder{
-  background: pink;
-  min-height: 100%;
+  min-height: 270px;
 }
 .chartHolder path{
   fill: none;

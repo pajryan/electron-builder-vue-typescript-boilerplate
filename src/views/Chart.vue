@@ -2,6 +2,7 @@
   <div class="root">
     <h1>Sample Chart</h1>
     <SampleChart class="chart" :data="chartData" />
+    <SampleChartJustD3 />
   </div>
 </template>
 
@@ -11,8 +12,9 @@
 
 import { mapState } from 'vuex' // import state
 let SampleChart = require('@/components/charting/SampleChart.vue').default
+let SampleChartJustD3 = require('@/components/charting/SampleChartJustD3.vue').default
 export default{
-  components: {SampleChart},
+  components: {SampleChart, SampleChartJustD3},
   data(){
     return {
       chartData: [
@@ -21,7 +23,7 @@ export default{
         {x:2, y: 20},
         {x:3, y: 5},
         {x:4, y: 15},
-        {x:5, y: 10}
+        {x:5, y: 110}
       ]
     }
   },

@@ -26,7 +26,7 @@ const props = {
   margin: {
     type: Object,
     default: () => ({
-      left: 0, right: 0, top: 10, bottom: 10,
+      left: 0, right: 0, top: 0, bottom: 0,
     }),
   }
 };
@@ -77,8 +77,9 @@ export default{
   },
   methods: {
     onResize() {
+      console.log('new hei8ght', this.$el.offsetHeight)
       this.width = this.$el.offsetWidth;
-      this.height = this.$el.offsetHeight;
+      this.height = this.$el.offsetHeight; // < 200 ? 200 : this.$el.offsetHeight;
     },
     createLine: d3.line().x(d => d.x).y(d => d.y),
     initialize() {
@@ -88,14 +89,13 @@ export default{
       d3.axisBottom().scale(this.scaled.y);
     },
     update() {
-      this.scaled.x.domain(d3.extent(this.data, (d, i) => i));
-      this.scaled.y.domain([0, 50]);
+      this.scaled.x.domain(d3.extent(this.data, (d, i) => d.x));
+      this.scaled.y.domain(d3.extent(this.data, (d, i) => d.y));
       this.points = [];
       this.data.forEach(d => {
         this.points.push({
           x: this.scaled.x(d.x),
-          y: this.scaled.y(d.y),
-          max: this.height,
+          y: this.scaled.y(d.y)
         });
       })
       this.paths.line = this.createLine(this.points);
@@ -114,8 +114,7 @@ export default{
 <style scoped lang="scss">
 .chartHolder{
   background: pink;
-  height: 100%;
-  min-height: 200px;
+  min-height: 100%;
 }
 .chartHolder path{
   fill: none;
